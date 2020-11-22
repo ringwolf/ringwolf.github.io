@@ -1,0 +1,190 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*公共样式*/
+body,
+div,
+p,
+ul,
+li,
+input,
+div,
+img,
+span,
+a,
+i,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	padding: 0;
+	margin: 0;
+}
+
+h1,
+body,
+html {
+ padding: 0;
+ margin: 0;
+}
+
+
+html,
+body {
+	position: relative;
+	height: 100%;
+	overflow: hidden;
+
+}
+
+body {
+	background: #fff;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: #000;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+#container,
+.section {
+ height: 100%;
+ position: relative;
+}
+
+/*右侧导航*/
+#pages {
+ position: fixed;
+ right: 5px;
+ top: 40%;
+ list-style: none;
+}
+
+#pages li {
+ width: 14px;
+ height: 14px;
+ border-radius: 50%;
+ border: 2px solid #0098E1;
+ background: #fff;
+ margin: 0 0 10px 5px;
+}
+
+#pages li.active {
+ width: 14px;
+ height: 14px;
+ border: 2px solid #999;
+ background: #666;
+}
+
+#section0 .title {
+ -webkit-transform: translateX(-100%);
+ /*内容旋转*/
+ transform: translateX(-100%);
+ -webkit-animation: sectitle0 1s ease-in-out 100ms forwards;
+ animation: sectitle0 1s ease-in-out 100ms forwards;
+ /*滑入页面*/
+}
+
+/*为支持上述滑入特效写的*/
+@-webkit-keyframes sectitle0 {
+ 0% {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+ }
+
+ 100% {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+ }
+}
+
+@keyframes sectitle0 {
+ 0% {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+ }
+
+ 100% {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+ }
+}
+
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+img {
+	border: 0;
+}
+
+input,
+textarea {
+	outline: none;
+	border: none;
+}
+
+.le {
+	float: left;
+}
+
+.ri {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.wrap {
+	position: relative;
+	width: 100%;
+	max-width: 720px;
+	min-width: 320px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.wrap_pad {
+	padding-left: 0.34rem;
+	padding-right: 0.34rem;
+}
+
+/*mui样式重置*/
+p {
+	font-size: 0.28rem;
+	color: #333;
+}
+
+input[type=text] {
+	line-height: inherit;
+	border: none;
+	margin: 0;
+	padding: 0;
+	background-color: #EBEBEB;
+	border: 1px solid #DCDCDC;
+	padding-left: 0.15rem;
+}
+
+textarea {
+	background-color: #EBEBEB !important;
+}
+
+button {
+	width: 100%;
+	background: #DD0903 !important;
+	color: #fff !important;
+	margin-top: 0.6rem !important;
+}
+
+

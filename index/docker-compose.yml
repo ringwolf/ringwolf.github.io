@@ -1,0 +1,261 @@
+version: '3.4'
+
+services:
+
+  # 统一网关 
+  comteck_gateway_api:
+    image: smartretail-gateway
+    #container_name: comteck_gateway_api
+    #hostname: comteck_gateway_api
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_gateway_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/gateway/Comteck.Gateway.API/Dockerfile
+    ports:
+     - "7000:80"
+    networks:
+      - inner_network
+
+  # 统一身份验证中心
+  comteck_identity_api:
+    image: smartretail-identity
+    #container_name: comteck_identity_api
+    #hostname: comteck_identity_api
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_identity_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/identity/Comteck.Identity.API/Dockerfile
+    ports:
+     - "7001:80"
+    networks:
+      - inner_network
+
+  # 统一消息中心
+  comteck_hubcenter_api:
+    image: smartretail-hubcenter
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_hubcenter_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/hubcenter/Comteck.HubCenter.API/Dockerfile
+    ports:
+      - "7002:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # Orleans
+  comteck_orleansserver_api:
+    image: smartretail-orleansserver
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_orleansserver_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Orleans.BusinessServer.API/Dockerfile
+    ports:
+      - "7003:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 主档中心
+  comteck_archives_api:
+    image: smartretail-archives
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_archives_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Archives.API/Dockerfile
+    ports:
+      - "7004:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 财务合同
+  comteck_finances_api:
+    image: smartretail-finances
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_finances_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Finances.API/Dockerfile
+    ports:
+      - "7005:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 会员中心
+  comteck_customer_api:
+    image: smartretail-customer
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_customer_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Customer.API/Dockerfile
+    ports:
+      - "7006:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 营销中心
+  comteck_market_api:
+    image: smartretail-market
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_market_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Market.API/Dockerfile
+    ports:
+      - "7007:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 供应链中心
+  comteck_supply_api:
+    image: smartretail-supply
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_supply_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Supply.API/Dockerfile
+    ports:
+      - "7008:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 库存仓储中心
+  comteck_storages_api:
+    image: smartretail-storages
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_storages_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Storages.API/Dockerfile
+    ports:
+      - "7009:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 销售中心
+  comteck_sales_api:
+    image: smartretail-sales
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_sales_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Sales.API/Dockerfile
+    ports:
+      - "7010:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 调度中心
+  comteck_schedules_api:
+    image: smartretail-schedules
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_schedules_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Schedules.API/Dockerfile
+    ports:
+      - "7012:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 报表中心
+  comteck_reports_api:
+    image: smartretail-reports
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_reports_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Reports.API/Dockerfile
+    ports:
+      - "7020:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 通知中心
+  comteck_notifys_api:
+    image: smartretail-notifys
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_notifys_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.Notifys.API/Dockerfile
+    ports:
+      - "7013:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+  # 多渠道中心
+  comteck_multichannel_api:
+    image: smartretail-multichannel
+    environment:
+      "ServiceDiscovery:LocalServiceUrl": http://comteck_multichannel_api
+    env_file:
+      - develop.env
+    build:
+      context: .
+      dockerfile: src/modules/tenantsystem/Comteck.MultiChannel.API/Dockerfile
+    ports:
+      - "7011:80"
+    depends_on:
+      - comteck_identity_api
+    networks:
+      - inner_network
+
+networks:
+  inner_network:
